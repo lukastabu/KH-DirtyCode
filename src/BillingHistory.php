@@ -8,5 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class BillingHistory extends Model
 {
+    public function getBillingStatistics() {
+        return BillingHistory::where('user_id', $this->id)
+            ->groupBy('created_at')
+            ->get();
+    }
+
+    public function getPaymentsStatistics() {
+        return Payments::where('user_id', $this->id)
+            ->groupBy('created_at')
+            ->get();
+    }
 
 }
